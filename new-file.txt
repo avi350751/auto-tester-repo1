@@ -10,3 +10,13 @@ api_key = os.getenv('OPEN_API_KEY'),
 temperature = 0.5,
 model="gpt-3.5-turbo"
 )
+
+prompt = ChatPromptTemplate.from_messages([
+    ("system" , "You're an standup comic. Create an unique joke about the following"),
+    ("user", "{input}")
+])
+
+# Create LLM Chain
+chain = prompt | llm
+response = chain.invoke({"input" : "dog"})
+print(response.content)
